@@ -5,7 +5,7 @@ function ciniki_jiji_main() {
     //
     // jiji panel
     //
-    this.menu = new M.panel('Items', 'ciniki_jiji_main', 'menu', 'mc', 'medium', 'sectioned', 'ciniki.jiji.main.menu');
+    this.menu = new M.panel('Buy/Sell', 'ciniki_jiji_main', 'menu', 'mc', 'medium', 'sectioned', 'ciniki.jiji.main.menu');
     this.menu.sections = {
         'items':{'label':'Items', 'type':'simplegrid', 'num_cols':2,
             'headerValues':null,
