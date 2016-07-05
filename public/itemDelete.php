@@ -84,7 +84,7 @@ function ciniki_jiji_itemDelete(&$ciniki) {
     }
     if( isset($rc['rows']) ) {
         foreach($rc['rows'] as $row) {
-            $rc = ciniki_core_objectDelete($ciniki, $args['business_id'], 'ciniki.jiji.item', $row['id'], $row['uuid'], 0x04);
+            $rc = ciniki_core_objectDelete($ciniki, $args['business_id'], 'ciniki.jiji.itemimage', $row['id'], $row['uuid'], 0x04);
             if( $rc['stat'] != 'ok' ) {
                 ciniki_core_dbTransactionRollback($ciniki, 'ciniki.jiji');
                 return $rc;

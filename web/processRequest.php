@@ -183,7 +183,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         if( $rc['stat'] != 'ok' ) {
             return $rc;
         }
-        if( !isset($rc['rows']) ) {
+        if( !isset($rc['rows']) || count($rc['rows']) == 0 ) {
             $page['blocks'][] = array('type'=>'message', 'section'=>'jiji-list', 'content'=>"Currently no listings");
         } else {
             if( $display_format == 'imagelist' ) {
