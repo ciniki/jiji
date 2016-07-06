@@ -138,7 +138,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
             //
             // Add primary image
             //
-            if( isset($item['image_id']) && $item['image_id'] > 0 ) {
+            if( isset($item['primary_image_id']) && $item['primary_image_id'] > 0 ) {
                 $page['blocks'][] = array('type'=>'asideimage', 'section'=>'primary-image', 'primary'=>'yes', 'image_id'=>$item['primary_image_id'], 'title'=>$item['title'], 'caption'=>'');
             }
 
