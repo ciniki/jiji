@@ -80,7 +80,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         ciniki_core_loadMethod($ciniki, 'ciniki', 'jiji', 'private', 'itemLoad');
         $rc = ciniki_jiji_itemLoad($ciniki, $business_id, $item_permalink, 'visible');
         if( $rc['stat'] != 'ok' ) {
-            return $rc;
+            return array('stat'=>'404', 'err'=>array('pkg'=>'ciniki', 'code'=>'3608', 'msg'=>"We're sorry, but that item no longer exists."));
         }
         $item = $rc['item'];
         $base_url .= '/' . $item_permalink;
