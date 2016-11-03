@@ -22,7 +22,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
     // Check to make sure the module is enabled
     //
     if( !isset($ciniki['business']['modules']['ciniki.jiji']) ) {
-        return array('stat'=>'404', 'err'=>array('pkg'=>'ciniki', 'code'=>'3571', 'msg'=>"I'm sorry, the page you requested does not exist."));
+        return array('stat'=>'404', 'err'=>array('code'=>'ciniki.jiji.16', 'msg'=>"I'm sorry, the page you requested does not exist."));
     }
     $page = array(
         'title'=>$args['page_title'],
@@ -80,7 +80,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         ciniki_core_loadMethod($ciniki, 'ciniki', 'jiji', 'private', 'itemLoad');
         $rc = ciniki_jiji_itemLoad($ciniki, $business_id, $item_permalink, 'visible');
         if( $rc['stat'] != 'ok' ) {
-            return array('stat'=>'404', 'err'=>array('pkg'=>'ciniki', 'code'=>'3608', 'msg'=>"We're sorry, but that item no longer exists."));
+            return array('stat'=>'404', 'err'=>array('code'=>'ciniki.jiji.17', 'msg'=>"We're sorry, but that item no longer exists."));
         }
         $item = $rc['item'];
         $base_url .= '/' . $item_permalink;

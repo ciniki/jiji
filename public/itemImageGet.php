@@ -85,10 +85,10 @@ function ciniki_jiji_itemImageGet($ciniki) {
         ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQuery');
         $rc = ciniki_core_dbHashQuery($ciniki, $strsql, 'ciniki.jiji', 'itemimage');
         if( $rc['stat'] != 'ok' ) {
-            return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3568', 'msg'=>'Item Image not found', 'err'=>$rc['err']));
+            return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.12', 'msg'=>'Item Image not found', 'err'=>$rc['err']));
         }
         if( !isset($rc['itemimage']) ) {
-            return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3569', 'msg'=>'Unable to find Item Image'));
+            return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.13', 'msg'=>'Unable to find Item Image'));
         }
         $itemimage = $rc['itemimage'];
     }

@@ -57,7 +57,7 @@ function ciniki_jiji_itemImageUpdate(&$ciniki) {
             return $rc;
         }
         if( $rc['num_rows'] > 0 ) {
-            return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3570', 'msg'=>'You already have an item image with this title, please choose another.'));
+            return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.14', 'msg'=>'You already have an item image with this title, please choose another.'));
         }
     }
 

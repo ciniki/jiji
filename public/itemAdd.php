@@ -63,7 +63,7 @@ function ciniki_jiji_itemAdd(&$ciniki) {
         return $rc;
     }
     if( $rc['num_rows'] > 0 ) {
-        return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3561', 'msg'=>'You already have a item with that name, please choose another.'));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.7', 'msg'=>'You already have a item with that name, please choose another.'));
     }
 
     //

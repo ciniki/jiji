@@ -39,10 +39,10 @@ function ciniki_jiji_itemLoad($ciniki, $business_id, $item_id, $images='all') {
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQuery');
     $rc = ciniki_core_dbHashQuery($ciniki, $strsql, 'ciniki.jiji', 'item');
     if( $rc['stat'] != 'ok' ) {
-        return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3563', 'msg'=>'Item not found', 'err'=>$rc['err']));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.5', 'msg'=>'Item not found', 'err'=>$rc['err']));
     }
     if( !isset($rc['item']) ) {
-        return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3564', 'msg'=>'Unable to find Item'));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.6', 'msg'=>'Unable to find Item'));
     }
     $item = $rc['item'];
 

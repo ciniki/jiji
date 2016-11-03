@@ -51,7 +51,7 @@ function ciniki_jiji_itemDelete(&$ciniki) {
         return $rc;
     }
     if( !isset($rc['item']) ) {
-        return array('stat'=>'fail', 'err'=>array('pkg'=>'ciniki', 'code'=>'3562', 'msg'=>'Item does not exist.'));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.jiji.8', 'msg'=>'Item does not exist.'));
     }
     $item = $rc['item'];
 
