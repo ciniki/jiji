@@ -89,14 +89,14 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         //
         // Setup sharing information
         //
-        if( isset($event['synopsis']) && $event['synopsis'] != '' ) {
-            $ciniki['response']['head']['og']['description'] = strip_tags($event['synopsis']);
-        } elseif( isset($event['description']) && $event['description'] != '' ) {
-            $ciniki['response']['head']['og']['description'] = strip_tags($event['description']);
+        if( isset($item['synopsis']) && $item['synopsis'] != '' ) {
+            $ciniki['response']['head']['og']['description'] = strip_tags($item['synopsis']);
+        } elseif( isset($item['description']) && $item['description'] != '' ) {
+            $ciniki['response']['head']['og']['description'] = strip_tags($item['description']);
         }
 
         //
-        // Reset page title to be the event name
+        // Reset page title to be the item name
         //
         $page['title'] .= ($page['title']!=''?' - ':'') . $item['title'];
 
