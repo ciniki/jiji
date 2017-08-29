@@ -23,7 +23,7 @@ function ciniki_jiji_itemAdd(&$ciniki) {
         'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'),
         'title'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Title'),
         'permalink'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'Permalink'),
-        'primary_image_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Primary Image'),
+        'primary_image_id'=>array('required'=>'no', 'blank'=>'no', 'name'=>'Primary Image'),
         'listing_date'=>array('required'=>'yes', 'blank'=>'no', 'type'=>'date', 'name'=>'Listing Date'),
         'synopsis'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'Synopsis'),
         'description'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'Description'),
