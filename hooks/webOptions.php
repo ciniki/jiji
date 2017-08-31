@@ -47,6 +47,12 @@ function ciniki_jiji_hooks_webOptions(&$ciniki, $business_id, $args) {
         'type'=>'text',
         'value'=>(isset($settings['page-jiji-name'])?$settings['page-jiji-name']:'cilist'),
         );
+    $options[] = array(
+        'label'=>'Introduction',
+        'setting'=>'page-jiji-intro', 
+        'type'=>'textarea',
+        'value'=>(isset($settings['page-jiji-intro'])?$settings['page-jiji-intro']:''),
+        );
 
     $pages['ciniki.jiji'] = array('name'=>'Buy/Sell', 'options'=>$options);
 

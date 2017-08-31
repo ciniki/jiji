@@ -41,7 +41,9 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
     } else {
         $module_title = 'Buy/Sell';
     }
-    $page['breadcrumbs'][] = array('name'=>$module_title, 'url'=>$args['base_url']);
+    if( count($page['breadcrumbs']) == 0 ) {
+        $page['breadcrumbs'][] = array('name'=>$module_title, 'url'=>$args['base_url']);
+    }
 
     $ciniki['response']['head']['og']['url'] = $args['domain_base_url'];
 
@@ -169,6 +171,10 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         $display_format = 'imagelist';
         if( isset($settings['page-jiji-display-format']) && $settings['page-jiji-display-format'] == 'cilist' ) {
             $display_format = 'cilist';
+        }
+
+        if( isset($settings['page-jiji-intro']) && $settings['page-jiji-intro'] != '' ) {
+            $page['blocks'][] = array('type'=>'content', 'content'=>$settings['page-jiji-intro']);
         }
 
         //
