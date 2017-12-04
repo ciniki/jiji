@@ -8,7 +8,7 @@
 // ---------
 // ciniki:
 // settings:        The web settings structure.
-// business_id:     The ID of the business to get jiji for.
+// tnid:     The ID of the tenant to get jiji for.
 //
 // args:            The possible arguments for posts
 //
@@ -16,12 +16,12 @@
 // Returns
 // -------
 //
-function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args) {
+function ciniki_jiji_web_processRequest(&$ciniki, $settings, $tnid, $args) {
 
     //
     // Check to make sure the module is enabled
     //
-    if( !isset($ciniki['business']['modules']['ciniki.jiji']) ) {
+    if( !isset($ciniki['tenant']['modules']['ciniki.jiji']) ) {
         return array('stat'=>'404', 'err'=>array('code'=>'ciniki.jiji.16', 'msg'=>"I'm sorry, the page you requested does not exist."));
     }
     $page = array(
@@ -80,7 +80,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         // Load the item
         //
         ciniki_core_loadMethod($ciniki, 'ciniki', 'jiji', 'private', 'itemLoad');
-        $rc = ciniki_jiji_itemLoad($ciniki, $business_id, $item_permalink, 'visible');
+        $rc = ciniki_jiji_itemLoad($ciniki, $tnid, $item_permalink, 'visible');
         if( $rc['stat'] != 'ok' ) {
             return array('stat'=>'404', 'err'=>array('code'=>'ciniki.jiji.17', 'msg'=>"We're sorry, but that item no longer exists."));
         }
@@ -182,7 +182,7 @@ function ciniki_jiji_web_processRequest(&$ciniki, $settings, $business_id, $args
         //
         $strsql = "SELECT id, title, permalink, primary_image_id AS image_id, listing_date, synopsis, 'yes' AS is_details "
             . "FROM ciniki_jiji_items "
-            . "WHERE business_id = '" . ciniki_core_dbQuote($ciniki, $business_id) . "' "
+            . "WHERE tnid = '" . ciniki_core_dbQuote($ciniki, $tnid) . "' "
             . "ORDER BY listing_date DESC "
             . "";
         $rc = ciniki_core_dbHashQuery($ciniki, $strsql, 'ciniki.jiji', 'item');

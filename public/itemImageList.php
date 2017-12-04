@@ -2,13 +2,13 @@
 //
 // Description
 // -----------
-// This method will return the list of Item Images for a business.
+// This method will return the list of Item Images for a tenant.
 //
 // Arguments
 // ---------
 // api_key:
 // auth_token:
-// business_id:        The ID of the business to get Item Image for.
+// tnid:        The ID of the tenant to get Item Image for.
 //
 // Returns
 // -------
@@ -19,7 +19,7 @@ function ciniki_jiji_itemImageList($ciniki) {
     //
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
-        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'),
+        'tnid'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Tenant'),
         ));
     if( $rc['stat'] != 'ok' ) {
         return $rc;
@@ -27,10 +27,10 @@ function ciniki_jiji_itemImageList($ciniki) {
     $args = $rc['args'];
 
     //
-    // Check access to business_id as owner, or sys admin.
+    // Check access to tnid as owner, or sys admin.
     //
     ciniki_core_loadMethod($ciniki, 'ciniki', 'jiji', 'private', 'checkAccess');
-    $rc = ciniki_jiji_checkAccess($ciniki, $args['business_id'], 'ciniki.jiji.itemImageList');
+    $rc = ciniki_jiji_checkAccess($ciniki, $args['tnid'], 'ciniki.jiji.itemImageList');
     if( $rc['stat'] != 'ok' ) {
         return $rc;
     }
@@ -46,7 +46,7 @@ function ciniki_jiji_itemImageList($ciniki) {
         . "ciniki_jiji_item_images.image_id, "
         . "ciniki_jiji_item_images.description "
         . "FROM ciniki_jiji_item_images "
-        . "WHERE ciniki_jiji_item_images.business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
+        . "WHERE ciniki_jiji_item_images.tnid = '" . ciniki_core_dbQuote($ciniki, $args['tnid']) . "' "
         . "";
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQueryArrayTree');
     $rc = ciniki_core_dbHashQueryArrayTree($ciniki, $strsql, 'ciniki.jiji', array(

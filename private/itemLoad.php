@@ -8,13 +8,13 @@
 // ---------
 // api_key:
 // auth_token:
-// business_id:         The ID of the business the item is attached to.
+// tnid:         The ID of the tenant the item is attached to.
 // item_id:             The ID of the item to get the details for.
 //
 // Returns
 // -------
 //
-function ciniki_jiji_itemLoad($ciniki, $business_id, $item_id, $images='all') {
+function ciniki_jiji_itemLoad($ciniki, $tnid, $item_id, $images='all') {
     ciniki_core_loadMethod($ciniki, 'ciniki', 'users', 'private', 'dateFormat');
     $date_format = ciniki_users_dateFormat($ciniki, 'mysql');
 
@@ -29,7 +29,7 @@ function ciniki_jiji_itemLoad($ciniki, $business_id, $item_id, $images='all') {
         . "ciniki_jiji_items.synopsis, "
         . "ciniki_jiji_items.description "
         . "FROM ciniki_jiji_items "
-        . "WHERE ciniki_jiji_items.business_id = '" . ciniki_core_dbQuote($ciniki, $business_id) . "' "
+        . "WHERE ciniki_jiji_items.tnid = '" . ciniki_core_dbQuote($ciniki, $tnid) . "' "
         . "";
     if( !is_numeric($item_id) ) {
         $strsql .= "AND ciniki_jiji_items.permalink = '" . ciniki_core_dbQuote($ciniki, $item_id) . "' ";
@@ -53,7 +53,7 @@ function ciniki_jiji_itemLoad($ciniki, $business_id, $item_id, $images='all') {
         $strsql = "SELECT id, title, permalink, flags, image_id, description "
             . "FROM ciniki_jiji_item_images "
             . "WHERE item_id = '" . ciniki_core_dbQuote($ciniki, $item['id']) . "' "
-            . "AND business_id = '" . ciniki_core_dbQuote($ciniki, $business_id) . "' "
+            . "AND tnid = '" . ciniki_core_dbQuote($ciniki, $tnid) . "' "
             . "";
         if( $images == 'visible' ) {
             $strsql .= "AND (flags&0x01) = 0x01 ";

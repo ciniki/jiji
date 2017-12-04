@@ -7,7 +7,7 @@
 # ------
 # id:               The ID of the item image.
 # uuid:             The Universal Unique ID.
-# business_id:      The ID of the business the item is attached to.
+# tnid:             The ID of the tenant the item is attached to.
 #
 # item_id:          The ID of the item in the ciniki_jiji_items table.
 # 
@@ -31,7 +31,7 @@
 create table ciniki_jiji_item_images (
     id int not null auto_increment,
     uuid char(36) not null,
-    business_id int not null,
+    tnid int not null,
     item_id int not null,
     title varchar(200) not null,
     permalink varchar(200) not null,
@@ -42,5 +42,5 @@ create table ciniki_jiji_item_images (
     last_updated datetime not null,
     primary key (id),
     index (item_id, title),
-    index (business_id, uuid, last_updated)
+    index (tnid, uuid, last_updated)
 ) ENGINE='InnoDB', COMMENT='v1.01';

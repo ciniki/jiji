@@ -1,7 +1,7 @@
-Ciniki - Small Business Management Platform
+Ciniki - Multitenant Cloud Platform
 ===========================================
 
-The jiji module is used by clubs or businesses to display a list of items for sale/wanted.
+The jiji module is used by clubs or tenants to display a list of items for sale/wanted.
 
 License
 -------

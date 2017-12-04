@@ -1,5 +1,5 @@
 //
-// This app will handle the listing, additions and deletions of jiji.  These are associated business.
+// This app will handle the listing, additions and deletions of jiji.  These are associated tenant.
 //
 function ciniki_jiji_main() {
     //
@@ -27,7 +27,7 @@ function ciniki_jiji_main() {
     };
     this.menu.open = function(cb, cat) {
         this.data = {};
-        M.api.getJSONCb('ciniki.jiji.itemList', {'business_id':M.curBusinessID}, function(rsp) {
+        M.api.getJSONCb('ciniki.jiji.itemList', {'tnid':M.curTenantID}, function(rsp) {
             if( rsp.stat != 'ok' ) {
                 M.api.err(rsp);
                 return false;
@@ -84,14 +84,14 @@ function ciniki_jiji_main() {
         };  
     this.item.fieldValue = function(s, i, d) { return this.data[i]; }
     this.item.fieldHistoryArgs = function(s, i) {
-        return {'method':'ciniki.jiji.itemHistory', 'args':{'business_id':M.curBusinessID, 'item_id':this.item_id, 'field':i}};
+        return {'method':'ciniki.jiji.itemHistory', 'args':{'tnid':M.curTenantID, 'item_id':this.item_id, 'field':i}};
     }
     this.item.thumbFn = function(s, i, d) {
         return 'M.ciniki_jiji_main.itemimage.open(\'M.ciniki_jiji_main.item.refreshImages();\',\'' + d.id + '\');';
     };
     this.item.refreshImages = function() {
         if( M.ciniki_jiji_main.item.item_id > 0 ) {
-            var rsp = M.api.getJSONCb('ciniki.jiji.itemGet', {'business_id':M.curBusinessID, 'item_id':this.item_id, 'images':'yes'}, function(rsp) {
+            var rsp = M.api.getJSONCb('ciniki.jiji.itemGet', {'tnid':M.curTenantID, 'item_id':this.item_id, 'images':'yes'}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -108,7 +108,7 @@ function ciniki_jiji_main() {
         if( iid != null ) { this.item_id = iid; }
         this.reset();
         this.sections._buttons.buttons.delete.visible = 'yes';
-        M.api.getJSONCb('ciniki.jiji.itemGet', {'business_id':M.curBusinessID, 'item_id':this.item_id, 'images':'yes'}, function(rsp) {
+        M.api.getJSONCb('ciniki.jiji.itemGet', {'tnid':M.curTenantID, 'item_id':this.item_id, 'images':'yes'}, function(rsp) {
             if( rsp.stat != 'ok' ) {
                 M.api.err(rsp);
                 return false;
@@ -124,7 +124,7 @@ function ciniki_jiji_main() {
         if( this.item_id > 0 ) {
             var c = this.serializeForm('no');
             if( c != '' ) {
-                M.api.postJSONCb('ciniki.jiji.itemUpdate', {'business_id':M.curBusinessID, 'item_id':this.item_id}, c, function(rsp) {
+                M.api.postJSONCb('ciniki.jiji.itemUpdate', {'tnid':M.curTenantID, 'item_id':this.item_id}, c, function(rsp) {
                     if( rsp.stat != 'ok' ) {
                         M.api.err(rsp);
                         return false;
@@ -136,7 +136,7 @@ function ciniki_jiji_main() {
             }
         } else {
             var c = this.serializeForm('yes');
-            M.api.postJSONCb('ciniki.jiji.itemAdd', {'business_id':M.curBusinessID}, c, function(rsp) {
+            M.api.postJSONCb('ciniki.jiji.itemAdd', {'tnid':M.curTenantID}, c, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -147,7 +147,7 @@ function ciniki_jiji_main() {
     };
     this.item.remove = function() {
         if( confirm("Are you sure you want to remove this item?") ) {
-            M.api.getJSONCb('ciniki.jiji.itemDelete', {'business_id':M.curBusinessID, 'item_id':this.item_id}, function(rsp) {
+            M.api.getJSONCb('ciniki.jiji.itemDelete', {'tnid':M.curTenantID, 'item_id':this.item_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -159,7 +159,7 @@ function ciniki_jiji_main() {
     this.item.addDropImage = function(iid) {
         if( this.item_id == 0 ) {
             var c = this.serializeForm('yes');
-            M.api.postJSONCb('ciniki.jiji.itemAdd', {'business_id':M.curBusinessID, 'item_id':this.item_id, 'image_id':iid}, c,
+            M.api.postJSONCb('ciniki.jiji.itemAdd', {'tnid':M.curTenantID, 'item_id':this.item_id, 'image_id':iid}, c,
                 function(rsp) {
                     if( rsp.stat != 'ok' ) {
                         M.api.err(rsp);
@@ -169,7 +169,7 @@ function ciniki_jiji_main() {
                     M.ciniki_jiji_main.item.refreshImages();
                 });
         } else {
-            M.api.getJSONCb('ciniki.jiji.itemImageAdd', {'business_id':M.curBusinessID, 'image_id':iid, 'title':'', 'item_id':this.item_id}, function(rsp) {
+            M.api.getJSONCb('ciniki.jiji.itemImageAdd', {'tnid':M.curTenantID, 'image_id':iid, 'title':'', 'item_id':this.item_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -212,7 +212,7 @@ function ciniki_jiji_main() {
         return ''; 
     };
     this.itemimage.fieldHistoryArgs = function(s, i) {
-        return {'method':'ciniki.jiji.itemImageHistory', 'args':{'business_id':M.curBusinessID, 'itemimage_id':this.itemimage_id, 'field':i}};
+        return {'method':'ciniki.jiji.itemImageHistory', 'args':{'tnid':M.curTenantID, 'itemimage_id':this.itemimage_id, 'field':i}};
     };
     this.itemimage.addDropImage = function(iid) {
         M.ciniki_jiji_main.itemimage.setFieldValue('image_id', iid, null, null);
@@ -224,7 +224,7 @@ function ciniki_jiji_main() {
         if( this.itemimage_id > 0 ) {
             this.reset();
             this.sections._buttons.buttons.delete.visible = 'yes';
-            M.api.getJSONCb('ciniki.jiji.itemImageGet', {'business_id':M.curBusinessID, 'itemimage_id':this.itemimage_id}, function(rsp) {
+            M.api.getJSONCb('ciniki.jiji.itemImageGet', {'tnid':M.curTenantID, 'itemimage_id':this.itemimage_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -246,7 +246,7 @@ function ciniki_jiji_main() {
         if( this.itemimage_id > 0 ) {
             var c = this.serializeFormData('no');
             if( c != '' ) {
-                M.api.postJSONFormData('ciniki.jiji.itemImageUpdate', {'business_id':M.curBusinessID, 
+                M.api.postJSONFormData('ciniki.jiji.itemImageUpdate', {'tnid':M.curTenantID, 
                     'itemimage_id':this.itemimage_id}, c, function(rsp) {
                         if( rsp.stat != 'ok' ) {
                             M.api.err(rsp);
@@ -260,7 +260,7 @@ function ciniki_jiji_main() {
             }
         } else {
             var c = this.serializeFormData('yes');
-            M.api.postJSONFormData('ciniki.jiji.itemImageAdd', {'business_id':M.curBusinessID, 'item_id':this.item_id}, c, function(rsp) {
+            M.api.postJSONFormData('ciniki.jiji.itemImageAdd', {'tnid':M.curTenantID, 'item_id':this.item_id}, c, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
@@ -272,7 +272,7 @@ function ciniki_jiji_main() {
     };
     this.itemimage.remove = function() {
         if( confirm('Are you sure you want to delete this image?') ) {
-            M.api.getJSONCb('ciniki.jiji.itemImageDelete', {'business_id':M.curBusinessID, 
+            M.api.getJSONCb('ciniki.jiji.itemImageDelete', {'tnid':M.curTenantID, 
                 'itemimage_id':this.itemimage_id}, function(rsp) {
                     if( rsp.stat != 'ok' ) {
                         M.api.err(rsp);
