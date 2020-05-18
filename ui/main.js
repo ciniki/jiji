@@ -146,15 +146,15 @@ function ciniki_jiji_main() {
         }
     };
     this.item.remove = function() {
-        if( confirm("Are you sure you want to remove this item?") ) {
-            M.api.getJSONCb('ciniki.jiji.itemDelete', {'tnid':M.curTenantID, 'item_id':this.item_id}, function(rsp) {
+        M.confirm("Are you sure you want to remove this item?",null,function() {
+            M.api.getJSONCb('ciniki.jiji.itemDelete', {'tnid':M.curTenantID, 'item_id':M.ciniki_jiji_main.item.item_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
                 }
                 M.ciniki_jiji_main.item.close();
             });
-        }
+        });
     }
     this.item.addDropImage = function(iid) {
         if( this.item_id == 0 ) {
@@ -271,16 +271,16 @@ function ciniki_jiji_main() {
         }
     };
     this.itemimage.remove = function() {
-        if( confirm('Are you sure you want to delete this image?') ) {
+        M.confirm('Are you sure you want to delete this image?',null,function() {
             M.api.getJSONCb('ciniki.jiji.itemImageDelete', {'tnid':M.curTenantID, 
-                'itemimage_id':this.itemimage_id}, function(rsp) {
+                'itemimage_id':M.ciniki_jiji_main.itemimage.itemimage_id}, function(rsp) {
                     if( rsp.stat != 'ok' ) {
                         M.api.err(rsp);
                         return false;
                     }
                     M.ciniki_jiji_main.itemimage.close();
                 });
-        }
+        });
     };
     this.itemimage.addButton('save', 'Save', 'M.ciniki_jiji_main.itemimage.save();');
     this.itemimage.addClose('Cancel');
@@ -299,7 +299,7 @@ function ciniki_jiji_main() {
         //
         var appContainer = M.createContainer(appPrefix, 'ciniki_jiji_main', 'yes');
         if( appContainer == null ) {
-            alert('App Error');
+            M.alert('App Error');
             return false;
         } 
 
